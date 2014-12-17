@@ -22,13 +22,13 @@ function DBQuery($sql)
     $res = mysql_query($sql);
     if (!$res) {
         echo mysql_error();
-        return [];
+        return array();
     }
 
-    $ret = [];
+    $ret = array();
     while ($row = mysql_fetch_assoc($res))
     {
-        $ret[] = $row;
+        $ret [] = $row;
     }
     return $ret;
 }
