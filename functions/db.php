@@ -2,7 +2,7 @@
 
 function config()
 {
-    return include __DIR__ . '/../config.php';
+    return include __DIR__ . '/config.php';
 }
 
 function DBConnect()
@@ -13,7 +13,7 @@ function DBConnect()
         $config['db']['user'],
         $config['db']['password']
     );
-    mysql_select_db($config['db']['dbname']);
+    mysql_select_db($config['db']['dbName']);
 }
 
 function DBQuery($sql)
@@ -22,10 +22,10 @@ function DBQuery($sql)
     $res = mysql_query($sql);
     if (!$res) {
         echo mysql_error();
-        return array();
+        return [];
     }
 
-    $ret = array();
+    $ret = [];
     while ($row = mysql_fetch_assoc($res))
     {
         $ret [] = $row;
