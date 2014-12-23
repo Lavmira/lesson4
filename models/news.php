@@ -1,6 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../functions/db.php';
+require_once __DIR__ . '/functions/db.php';
+require_once __DIR__ . '/classes/AModel.php';
 
 function News_getAll()
 {
@@ -8,3 +9,5 @@ function News_getAll()
     SELECT * FROM news
     ");
 }
+
+
