@@ -1,10 +1,11 @@
 <?php
 
-return array(
-    'db' => array(
+return [
+    'db' =>
+     [
         'host' => 'localhost',
         'user' => 'root',
         'password' => '',
-        'dbname' => 'test'
-    )
-);
+        'dbName' => 'test',
+    ]
+];

@@ -1,7 +1,7 @@
 <?php
 
-require 'boot.php';
-
+require __DIR__ . '/boot.php';
+require __DIR__ . '/classes/AController.php';
 // r=news/all
 
 $route = $_GET['r'];
