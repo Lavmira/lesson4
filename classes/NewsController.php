@@ -18,6 +18,18 @@ extends AController
 
         $view->display('view/one.php');
     }
+    protected function actionEdit()
+    {
+        $view = new View();
+        $view->article = News_getEdit($_GET['id']);
 
+        $view->display('view/edit.php');
+    }
+    protected function actionSave()
+    {
+        $view = new View();
+        $view->article = News_getSave($_GET['id']);
 
+        $view->display('view/save.php');
+    }
 } 
