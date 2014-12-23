@@ -1,4 +1,3 @@
-<?php
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +11,7 @@
 </head>
 <body>
 
-<?php include 'view/one.php'; ?>
+<?php include '/article.php'; ?>
 
 <?php if(null === $article): ?>
     <?php if(null !== $id): ?>
