@@ -6,28 +6,17 @@ abstract class Model
 {
     static protected $table;
 
+    $conn = new DBConnection;
+    $result = $conn->query('SELECT * FROM table' WHERE id=:id',
+                        [':id'=>$id])->fetch();
 
-    protected function __construct()
-    {
-        $this->db = new DB();
-    }
-    static function getConnection()
-          {
-              try
-              {
-                  $dsn = 'mysql:dbName=test; host=localhost';
-                  return new PDO($dsn, 'root', '');
-              } catch (PDOException $e)
-              {
-                  throw new ModelException ('Ошибка при соединении.');
-              }
-          }
+
     static function findAll()
     {
         try
         {
-            $sql = 'SELECT * FROM' . static::$table;
-            $dbh = static::getConnection();
+            $sql = 'SELECT * FROM ' . static::$table;
+            $dbh = static::DBConnection();
             $sth = $dbh->prepare($sql);
             $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
             $sth->execute();
@@ -59,13 +48,15 @@ abstract class Model
 }
 }
 
+
+/*
 class News extends Model
 {
-    static protected $table = 'new';
+    static protected $table = 'all';
 }
 class One extends Model
 {
-    static protected $table = 'article';
+    static protected $table = 'one';
 }
 class Edit extends Model
 {
@@ -84,7 +75,7 @@ try
             echo $e->getMessage();
             die;
         }
-/*
+
 $model = new News();
 
 
@@ -129,5 +120,4 @@ class NewsModel
 $model = new  NewsModel();
 $model->getAll();
 $model->getOne(1);
-$model->getAuthor();
-*/
+$model->getAuthor();*/
