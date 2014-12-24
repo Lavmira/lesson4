@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
+    <title>Добавление новости</title>
     <meta charset="UTF-8">
-    <title>Добавить новость</title>
-    <style>
-        fieldset{width: 300px;}
-        input[type="text"]{width:340px;}
-        legend{font-weight: bold;}
-    </style>
 </head>
 <body>
-<div>
-    <fieldset>
-        <legend>Добавьте новость</legend>
-        <form action="/save.php" method="POST">
-            <span>Заголовок</span><br/>
-            <input type="text" name="title"><br/>
-            <span>Текст новости</span><br/>
-            <textarea name="text" cols="40" rows="8"/></textarea><br/>
-            <input type="submit" value="Отправить"/>
-        </form>
-    </fieldset>
-</div>
+<h1>Добавление новости:</h1>
+<form action="?r=news/add" method="post">
+    <p>Заголовок:<br />
+        <input type="text" name="title" required placeholder=" |Enter title" autofocus=""/><br />
+    </p>
+    <p>Текст:<br />
+        <textarea name="text" cols="40" rows="3" required></textarea>
+    </p>
+    <input type="submit" name="submit" value="Отправить"/>
+</form>
+<a href="/../index.php">На главную</a>
+<br />
 </body>
 </html>

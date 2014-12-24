@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Новость <?=$article['id'];?></title>
-<meta charset="UTF-8">
-<style>
-    fieldset{width: 250px;}
-    input[type="text"]{width:150px;margin-bottom: 8px;}
-    legend{font-weight: bold;}
-</style>
+    <title>Новости</title>
+    <meta charset="UTF-8">
 </head>
 <body>
-
-<?php include '/article.php'; ?>
-
-<?php if(null === $article): ?>
-    <?php if(null !== $id): ?>
-        Нет новости с таким номером
-    <?php endif; ?>
-<?php else: ?>
-    <h1><?=$article['title'] . " " . $article['id'];?></h1>
-    <div><?=$article['text'];?></div>
-<?php endif; ?>
-
+<article>
+    <h1><?=$one_article->title;?></h1>
+    <div><?=$one_article->text;?></div>
+</article>
+<div><a href="?r=news/formEdit&id=<?=$one_article->id ;?>">Редактировать</a></div>
+<div><a href="?r=news/Delete&id=<?=$one_article->id ;?>">Удалить</a></div>
 </body>
 </html>
