@@ -8,7 +8,8 @@
 <body>
 <div>
     <? foreach ($news as $key => $value): ?>
-        <a href="?r=news/one&id=<?= $value->id; ?>">Просмотр новости № <?= $key+1; ?></a><br />
+        <a href="?r=news/one&id=<?= $value->id; ?>">Просмотр новости №
+            <?= $key+1; ?></a><br />
     <?php endforeach; ?>
 </div>
 <br/>
