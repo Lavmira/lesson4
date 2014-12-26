@@ -51,6 +51,7 @@ abstract class Model
 
     public function save()
     {
+        $dbh = static::DBConnection();
         $tokens = [];
         $values = [];
         foreach (static::$columns as $column)
@@ -59,7 +60,7 @@ abstract class Model
             $values[':' . $column] = $this->$column;
         }
 
-        $dbh = static::DBConnection();
+
         if (!isset($this->id))
         {
           $sql = 'INSERT INTO ' . static::$table . '(' . implode(',', static::$columns) . ')
@@ -81,7 +82,46 @@ abstract class Model
             ';
             $sth = $dbh->prepare($sql);
             $sth->execute([':id'=>$this->id] + $values);
-class News extends Model
+
+
+
+            public function delete()
+            {
+                $dbh = static::DBConnection();
+                $tokens = [];
+                $values = [];
+                foreach (static::$columns as $column)
+                {
+                    $tokens[] = ':' . $column;
+                    $values[':' . $column] = $this->$column;
+                }
+
+
+                if (!isset($this->id))
+                {
+                    $sql = 'INSERT INTO ' . static::$table . '(' . implode(',', static::$columns) . ')
+           VALUES(' . implode(',', $tokens) . ')';
+                    $sth = $dbh->prepare($sql);
+                    $sth->execute($values);
+                    $this->id = $dbh->dba_delete();
+                } else {
+                    $columns =[];
+                    foreach (static::$columns as $column)
+                    {
+                        $columns[] = $column . '=:' . $column;
+                    }
+
+                    $sql = '
+            UPDATE ' . static::$table . '
+            SET ' . implode(',', $columns) . '
+            WHERE id=:id
+            ';
+                    $sth = $dbh->prepare($sql);
+                    $sth->execute([':id'=>$this->id] + $values);
+
+
+
+                    class News extends Model
 {
     static protected $table = 'news';
     static protected $columns = ['title', 'text'];
