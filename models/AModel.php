@@ -1,4 +1,6 @@
 <?php
+//require_once __DIR__. '/models/DBConnect.php';
+//require_once __DIR__. '/boot.php';
 
 class ModelException extends Exception {}
 abstract class Model
@@ -6,10 +8,10 @@ abstract class Model
 {
     static protected $table;
 
-    $conn = new DBConnection;
-    $result = $conn->query('SELECT * FROM table' WHERE id=:id',
-                        [':id'=>$id])->fetch();
-
+    static function DBConnection()
+    {
+        return include __DIR__ . '/DBConnect.php';
+    }
 
     static function findAll()
     {
@@ -32,92 +34,73 @@ abstract class Model
 
     static function findByPk($id)
 {
-    try
-    {
-        $sql = 'SELECT * FROM' . static::$table;
-        $dbh = static::getConnection();
-        $sth = $dbh->prepare( “SELECT * FROM news WHERE id=:id” );
+
+
+        $sql = 'SELECT * FROM ' . static::$table . 'WHERE id=>:id' ;
+        $dbh = static::DBConnection();
+        $sth = $dbh->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        $sth->execute([:id => 1]);
-        return $sth->fetchOne();
-    } catch (Exception $e)
+        $sth->execute([':id' => $id]);
+        return $sth->fetch();
+
+
+
+
+}
+
+
+    public function save()
     {
-        echo $e->getMessage();
-        die;
-    }
-}
-}
-
-
-/*
-class News extends Model
-{
-    static protected $table = 'all';
-}
-class One extends Model
-{
-    static protected $table = 'one';
-}
-class Edit extends Model
-{
-    static protected $table = 'edit';
-}
-class Save extends Model
-{
-    static protected $table = 'save';
-}
-
-try
-{
-    $new = News::findAll();
-} catch (Exception $e)
+        $tokens = [];
+        $values = [];
+        foreach (static::$columns as $column)
         {
-            echo $e->getMessage();
-            die;
+            $tokens[] = ':' . $column;
+            $values[':' . $column] = $this->$column;
         }
 
-$model = new News();
+        $dbh = static::DBConnection();
+        if (!isset($this->id))
+        {
+          $sql = 'INSERT INTO ' . static::$table . '(' . implode(',', static::$columns) . ')
+           VALUES(' . implode(',', $tokens) . ')';
+            $sth = $dbh->prepare($sql);
+            $sth->execute($values);
+            $this->id = $dbh->lastInsertId();
+        } else {
+            $columns =[];
+            foreach (static::$columns as $column)
+            {
+                $columns[] = $column . '=:' . $column;
+            }
 
-
-function News_getOne()
+            $sql = '
+            UPDATE ' . static::$table . '
+            SET ' . implode(',', $columns) . '
+            WHERE id=:id
+            ';
+            $sth = $dbh->prepare($sql);
+            $sth->execute([':id'=>$this->id] + $values);
+class News extends Model
 {
-    return DBQuery("
-    SELECT * FROM news
-    ");
+    static protected $table = 'news';
+    static protected $columns = ['title', 'text'];
 }
-
-
-
-interface IModel
-{
-    public  function getAll();
-    public  function getOne($id);
-}
-interface IHasAuthor
-{
-    public  function getAuthor();
-}
-
-class NewsModel
-    implements IModel, IHasAuthor
-{
-
-    public function getAll()
+    try
     {
-        echo 'Get all news';
-    }
-
-    public function getOne($id)
-    {
-        echo 'Get one article #' . $id . '!' ;
-    }
-
-    public function getAuthor()
-    {
-        echo 'Лев Толстой';
-    }
+    $news = News::findAll();
+    }catch (Exception $e) {
+        echo $e->getMessage();
+        die;
 }
-$model = new  NewsModel();
-$model->getAll();
-$model->getOne(1);
-$model->getAuthor();*/
+
+$article =News::findByPk(3);
+$article->title = 'Суперновость!!!';
+
+
+$article = new News;
+$article->title = 'Новая новость';
+$article->text = 'Ее текст';
+$article->save();
+var_dump($article->id);
+
