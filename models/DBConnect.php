@@ -2,18 +2,19 @@
 class DBConnection
 {
     protected $pdo;
-    function config()
+    public function config()
     {
         return include __DIR__ . '/../config.php';
     }
     public function __construct()
     {
         try {
-            $config = $this->config();
-            $dsn = $config['db']['driver'] . ':host=' . $config['db']['host'] . '; dbName=' . $config['db']['dbname'];
-            $this->pdo =  new PDO($dsn, $config['db']['user'], $config['db']['password']);
-        }
-        catch (PDOException $e) {
+
+            $config = static::config();
+            $dsn = 'mysql:dbName='.$config['db']['dbName'] . ':host=' . $config['db']['host'];
+            $dbh = new PDO($dsn, $config['db']['user'], $config['db']['password']);
+            return $dbh;
+        }catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
             die;
         }
@@ -25,9 +26,9 @@ class DBConnection
         $statement->setFetchMode(PDO::FETCH_CLASS,get_called_class());
         return $statement;
     }
-    public function Execute($query, array $parameters = [])
+    public function Query($query,  $parameters = [])
     {
-        $statement = $this->toPrepare($query);
+        $statement = $this->Prepare($query);
         $statement->execute($parameters);
         return $statement;
     }
@@ -50,3 +51,4 @@ function DBQuery($sql)
     }
     return $ret;
 }
+*/
