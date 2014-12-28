@@ -1,6 +1,4 @@
 <?php
-//require_once __DIR__. '/model/ModelNews.php';
-//require_once __DIR__. 'view/index.php';
 
 //единая точка входа
 
@@ -15,7 +13,7 @@ $actionPart = 'index';
 
 //роутер
 //?r=news/one&id=1
-//здесь используем контроллер newsController, метод actionOne, id - номер новости
+//здесь используем контроллер NewsController, метод actionOne, id - номер новости
 $route = $_GET['r'];
 if (null !== $route)
 {

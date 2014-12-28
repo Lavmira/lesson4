@@ -17,23 +17,21 @@ function __autoload($class)
     }
 }
 
-
-
 /*
-
-
-
 function __autoload($class)
 {
-    require __DIR__ . '/classes/' . $class . '.php';
+    $filename = __DIR__ .'/classes/' . $class . '.php';
+    if (file_exists($filename))
+    {
+        require_once $filename;
+    }
 }
 
-require_once __DIR__ . '/models/ModelNews.php';
-;
 
 spl_autoload_register('autoloadClasses');
 
-function autoloadModels($class)
+
+function __autoload($class)
 {
     $filename = __DIR__ .'/models/' . $class . '.php';
     if (file_exists($filename))
@@ -41,4 +39,15 @@ function autoloadModels($class)
         require_once $filename;
     }
 }
-spl_autoload_register('autoloadModels');*/
+spl_autoload_register('autoloadModels');
+
+
+function __autoload($class)
+{
+    $filename = __DIR__ .'/view/' . $class . '.php';
+    if (file_exists($filename))
+    {
+        require_once $filename;
+    }
+}
+spl_autoload_register('autoloadView');*/
