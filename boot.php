@@ -4,6 +4,8 @@ function __autoload($class)
 {
 
     $artClassDir = ["classes", "controller", "models"];
+
+        foreach  ($artClassDir as $class)
     {
         $classPath = __DIR__ . "/../" . $artClassDir . "/" . $class . ".php";
 
