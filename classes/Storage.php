@@ -3,6 +3,12 @@ class Storage
     implements Countable, Iterator
 {
     protected $data;
+
+    public function __construct() {
+
+        $this->data = [];
+    }
+
     public function __set($k, $v)
     {
         $this->data[$k] = $v;
