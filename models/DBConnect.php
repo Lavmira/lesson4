@@ -13,7 +13,7 @@ class DBConnection
             $config = static::config();
             $dsn = 'mysql:dbName='.$config['db']['dbName'] . ':host=' . $config['db']['host'];
             $dbh = new PDO($dsn, $config['db']['user'], $config['db']['password']);
-            return $dbh;
+            $this->PDO = $dbh;
         }catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
             die;
