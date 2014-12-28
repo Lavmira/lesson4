@@ -1,0 +1,143 @@
+body{
+    background-color: gray;
+}
+#page-index{
+    width: 600px;
+    margin: 0px auto;
+    background-color: whitesmoke;
+
+}
+#main-menu{
+    width:600px;
+    height: 40px;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    background-color: navy;
+}
+#main-menu div{
+    height: 40px;
+    display:table-cell;
+    text-align:  center;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Arial;
+    font-size: 17px;
+
+}
+#main-menu a{
+    float:left;
+    text-decoration: none;
+    color:white;
+    background-color: navy;
+    border:none;
+
+}
+#main-menu a:hover{
+    background-color: blue;
+}
+.title{
+    background-color:  activecaption;
+    padding-left: 40px;
+    margin:0px;
+    font-family: Arial;
+    font-size: 19px;
+    font-weight: bold;
+}
+.text{
+
+    background-color:  bisque;
+    padding-left: 40px;
+    font-family: Arial;
+    font-size: 14px;
+}
+.news-number{
+    font-family: Arial;
+    font-size: 14px;
+    font-style:  italic;
+}
+
+fieldset{
+//width:  fit-content;
+}
+
+input[type="text"]{
+    width:200px;
+    margin-bottom: 8px;
+}
+
+legend{
+    font-weight: bold;
+}
+
+#page-adminindex{
+    width: 800px;
+    margin: 0px auto;
+    background-color: whitesmoke;
+
+}
+
+#admin-menu{
+    width:800px;
+    height: 40px;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    background-color: maroon;
+}
+#admin-menu div{
+    height: 40px;
+    display:table-cell;
+    text-align:  center;
+    vertical-align: middle;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: Arial;
+    font-size: 17px;
+
+}
+#admin-menu a{
+    float:left;
+    text-decoration: none;
+    color:white;
+    background-color: maroon;
+    border:none;
+
+}
+#admin-menu a:hover{
+    background-color:  chocolate;
+}
+#admin-view-all-tbl{
+    width:800px;
+    border: 1px solid black;
+    border-collapse:  collapse;
+}
+#admin-view-all-tbl td{
+    border: 1px solid black;
+    border-collapse:  collapse;
+
+}
+#admin-view-all-tbl td{
+    border: 1px solid black;
+    border-collapse:  collapse;
+
+}
+#admin-view-all-tbl td{
+    border: 1px solid black;
+    border-collapse:  collapse;
+
+}
+#admin-view-all-tbl td.table-id{
+    text-align: center;
+
+}
+#admin-view-all-tbl th{
+    border: 1px solid black;
+    border-collapse:  collapse;
+    background-color:  blue;
+    color:white;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+}
