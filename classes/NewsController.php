@@ -2,14 +2,14 @@
 
 
 class NewsController
-extends AController
+    extends AController
 {
     private $view;
     private $model;
     public function __construct()
     {
         $this->view = new View();
-        $this->model = new ModelNews();
+        $this->model = new NewsModel();
     }
     // главная страница
     protected function actionIndex()
