@@ -32,6 +32,12 @@ class DBConnection
         $statement->execute($parameters);
         return $statement;
     }
+    public function QueryOne($query,  $parameters = [1])
+{
+    $statement = $this->Prepare($query);
+    $statement->execute($parameters);
+    return $statement;
+}
 }
 
 /*
