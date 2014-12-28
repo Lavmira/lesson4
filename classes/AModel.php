@@ -1,16 +1,14 @@
 <?php
-//require_once __DIR__. '/models/DBConnect.php';
-//require_once __DIR__. '/boot.php';
 
 class ModelException extends Exception {}
-abstract class Model
+abstract class AbstractModel
 
 {
     static protected $table;
 
     static function DBConnection()
     {
-        return include __DIR__ . '/DBConnect.php';
+        return include __DIR__ . '/../models/DBConnect.php';
     }
 
     static function findAll()
@@ -34,19 +32,14 @@ abstract class Model
 
     static function findByPk($id)
 {
-
-
         $sql = 'SELECT * FROM ' . static::$table . 'WHERE id=>:id' ;
         $dbh = static::DBConnection();
         $sth = $dbh->prepare($sql);
         $sth->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         $sth->execute([':id' => $id]);
         return $sth->fetch();
-
-
-
-
 }
+
 
 
     public function save()
@@ -54,6 +47,7 @@ abstract class Model
         $dbh = static::DBConnection();
         $tokens = [];
         $values = [];
+
         foreach (static::$columns as $column)
         {
             $tokens[] = ':' . $column;
@@ -69,7 +63,7 @@ abstract class Model
             $sth->execute($values);
             $this->id = $dbh->lastInsertId();
         } else {
-            $columns =[];
+            $columns = [];
             foreach (static::$columns as $column)
             {
                 $columns[] = $column . '=:' . $column;
