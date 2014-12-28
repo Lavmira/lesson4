@@ -1,29 +1,31 @@
 <?php
 //require_once __DIR__ . '/models/DBConnect.php';
 
-require_once __DIR__. '/boot.php';
+require_once __DIR__. '/../boot.php';
 
-class Model
+class NewsModel
     extends AbstractModel
 {
     static protected $table = 'news';
-    static function updateArticle($id, $new_title, $new_text)
+    static protected $columns = ['title', 'text'];
+
+    static function updateArticle($id, $title, $text)
     {
-        $sql = "UPDATE " . static::$table . " SET title=:new_title, text=:new_text  WHERE id=:id";
+        $sql = "UPDATE " . static::$table . " SET title=:title, text=:text  WHERE id=:id";
         $db = new DBConnection();
-        return $db->toExecute($sql,[':id'=>$id,':new_title'=>$new_title,':new_text'=>$new_text]);
+        return $db->Execute($sql,[':id'=>$id,':title'=>$title,':text'=>$text]);
     }
     static function insertArticle($title,$text)
     {
         $sql = "INSERT INTO " . static::$table . " (title,text) VALUES (:title, :text)";
         $db = new DBConnection();
-        return $db->toExecute($sql,[':title'=>$title,':text'=>$text]);
+        return $db->Execute($sql,[':title'=>$title,':text'=>$text]);
     }
     static function deleteArticle($id)
     {
         $sql = "DELETE FROM " . static::$table . " WHERE id=:id";
         $db = new DBConnection();
-        return $db->toExecute($sql,[':id'=>$id]);
+        return $db->Execute($sql,[':id'=>$id]);
     }
 }
 
