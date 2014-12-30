@@ -6,8 +6,17 @@
 
 require_once __DIR__. '/boot.php';
 
-//задаем стартовую страницу
+$article = \App\Models\News::findByPk(2);
 
+//echo json_encode($article);
+
+//$encoded = json_encode($article);
+//$article = json_decode($article);
+
+
+
+//задаем стартовую страницу
+/*
 $controllerClassName = 'NewsController';
 $actionPart = 'index';
 
@@ -26,7 +35,7 @@ if (null !== $route)
 $controller = new $controllerClassName;
 $controller->action($actionPart);
 
-
+*/
 
 
 
