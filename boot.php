@@ -2,8 +2,19 @@
 
 function __autoload($class)
 {
+    $namespace = explode('\\', $class);
+    array_shift($namespace);
+    require __DIR__ . '/' .  implode('/', $namespace) . '.php';
+}
 
-    $artClassDir = ["classes", "controller", "models"];
+
+/*
+ require_once __DIR__ . '/Models/news.php';
+
+function __autoload($class)
+{
+
+    $artClassDir = ["classes", "controller", "Models"];
 
         foreach  ($artClassDir as $class)
     {
@@ -17,7 +28,7 @@ function __autoload($class)
     }
 }
 
-/*
+
 function __autoload($class)
 {
     $filename = __DIR__ .'/classes/' . $class . '.php';
@@ -33,7 +44,7 @@ spl_autoload_register('autoloadClasses');
 
 function __autoload($class)
 {
-    $filename = __DIR__ .'/models/' . $class . '.php';
+    $filename = __DIR__ .'/Models/' . $class . '.php';
     if (file_exists($filename))
     {
         require_once $filename;
@@ -50,4 +61,6 @@ function __autoload($class)
         require_once $filename;
     }
 }
-spl_autoload_register('autoloadView');*/
+spl_autoload_register('autoloadView');
+
+*/
